@@ -1,0 +1,55 @@
+<div class="container">
+<div class="container customright">
+
+    <!-- Show it when there is no employee -->
+    <div class="no-data text-center" *ngIf="Item.length == 0">
+      <p>There is no items added yet!</p>
+      <!-- <button class="btn btn-outline-primary" routerLink="/create-employee">Add Empoyee</button> -->
+    </div>
+  
+    <!-- Employees list table, it hides when there is no employee -->
+    <div *ngIf="Item.length !== 0">
+      <h3 class="mb-3 text-center">Items List</h3>
+  
+      <div class="col-md-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">name</th>
+              <th scope="col">email</th>
+              <th scope="col">phone</th>
+              <!-- <th scope="col">Action</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of Item">
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.phone}}</td>
+              <!-- <td>
+                <span class="edit" routerLink="/employee-edit/{{employee.id}}">Edit</span>
+                <span class="delete" (click)="deleteEmployee(employee.id)">Delete</span>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+</div>
+
+<div class="container customleft">
+
+    <!-- Grid tabel -->
+    <mat-grid-list cols="4" rowHeight="100px" gutterSize="5px">
+    <mat-grid-tile *ngFor="let tile of tiles"
+    [colspan]="tile.cols"
+    [rowspan]="tile.rows"
+    [style.border]="tile.border">
+    
+    </mat-grid-tile>
+ </mat-grid-list>
+  
+</div>
