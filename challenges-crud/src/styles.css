@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h2, h3, h4, h5{
+    font-family: 'Roboto Slab', serif;
+}
+
+.current {
+    /*background: #6a776c !important;*/
+    background: #7AA896 !important;
+}
+
+.btn-outline-primary{
+    color:#BB6C2C;
+    border-color:#BB6C2C;
+    background-color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.btn-outline-primary:hover{
+    color:white;
+    border-color:#BB6C2C;
+    background-color:#BB6C2C;
+}
+
+.navbar-light{
+    background-color:transparent !important;
+}
+
+.list-group{
+    margin-bottom: 1.5em;
+}
+
+.list-group-item{
+    vertical-align: middle;
+    border: none;
+    margin-top: 0.5em;
+    opacity: 90%;
+}
+
+.list-group-item:hover{
+    border: none;
+    margin-top: 0.5em;
+    background-color: #E99B86;
+    opacity: 100%;
+}
+
+.challenge-title{
+    font-size: 1.1em;
+    margin-bottom: 0;
+}
+
+.challenge-subtitle{
+    font-size: 0.9em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+.active{
+    z-index:3;color:#fff;
+    background-color:#E99B86;
+    border: none;
+    margin-top: 0.5em;
+    opacity: 100%;
+}
+
+.list-icon{
+    width: 2.6em; 
+    height: 2.6em; 
+    display: inline-block;
+    background-size: 100% 100%;
+    margin-right: 0.8em;
+    vertical-align: middle;
+    opacity: 65%;
+}
+
+.list-text{
+    display: inline-block;
+    display: inline-block;
+    height: auto; 
+    width: 82.5%;
+    vertical-align: middle;
+}
+
+.btn-outline-info{
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+    color:#556662;
+    border-color:#556662;
+
+}
+.btn-outline-info:hover{
+    color:white;
+    border-color:#556662;
+    background-color:#556662;
+    background-blend-mode: overlay;
+}
+
+.btn-outline-info-reverse{
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+    color:white;
+    border-color:#556662;
+    background-color: #556662;
+}
+.btn-outline-info-reverse:hover{
+    color: #556662;
+    border-color: #556662;
+    background-color: #7AA896;
+    background-blend-mode: overlay;
+}
+
+.shadow{
+    box-shadow: 10px 10px 5px grey;
+}
+
+.fully-rounded{
+    border-radius: 16px;
+    padding: 2.2em;
+}

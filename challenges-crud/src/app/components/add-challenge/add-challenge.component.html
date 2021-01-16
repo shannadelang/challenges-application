@@ -1,0 +1,71 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+          <!-- FORM ITEMS -->
+        <div class="form-group"> <!-- title -->
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            [(ngModel)]="challenge.title"
+            name="title"
+          />
+        </div>
+        <div class="form-group"> <!-- description FIXME: groter blok voor text-->
+          <label for="description">Description</label>
+          <input
+            class="form-control"
+            id="description"
+            required
+            [(ngModel)]="challenge.description"
+            name="description"
+          />
+        </div>
+        <div class="form-group">
+            <label class="select-label" for="category">Select Category </label>
+            <select 
+              id="category"
+              required
+              [(ngModel)]="challenge.category"
+              name="category">
+                <option *ngFor="let c of categories" [value]="c.name">
+                    {{c.name}}</option>
+              </select>
+          </div>
+        <div class="form-group">
+            <label class="select-label" >Level</label>
+            <select 
+              id="level"
+              required
+              [(ngModel)]="challenge.level"
+              name="level">
+                <option *ngFor="let l of levels" [value]="l">
+                    {{l}}</option>
+              </select>
+          </div>
+
+        <button (click)="submitted = true" class="btn btn-success">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Do you want to share you challenge?</h4> <!-- FIXME: laat content van challenge zien voordat je echt 'saved' -->
+        <div class="form-group">
+            <div>          
+              <label [ngSwitch]="challenge.public" class="switch">
+                 <input type="checkbox"
+                    id="public"
+                    required
+                    [(ngModel)]="challenge.public"
+                    name="public"/>
+                 <span class="slider round"></span>
+                 <p *ngSwitchDefault class="switch-tag">No, keep it private</p>
+                 <p *ngSwitchCase="true" class="switch-tag">Yes, make it public!</p>
+              </label>
+            </div>
+        </div>
+        <button class="btn btn-success" (click)="saveChallenge(); newChallenge()">SAVE</button>
+      </div>
+    </div>
+  </div>

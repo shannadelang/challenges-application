@@ -1,0 +1,26 @@
+<div class="decor"></div>
+<div>
+  <nav class="navbar navbar-expand ">
+    <div class="navbar-nav mr-auto">
+      <h3 class="navbar-brand">Climate Hero</h3>
+      <li class="nav-item">
+        <a routerLink="challenges" class="nav-link"><i class="fa fa-mountain"></i></a>
+      </li>
+      <li *ngIf="loggedIn" class="nav-item">
+        <a routerLink="activechallenges" class="nav-link"><i class="fas fa-hiking"></i></a>
+      </li>
+      <li *ngIf="loggedIn" class="nav-item">
+        <a routerLink="completedchallenges" class="nav-link"><i class="fa fa-trophy"></i></a>
+      </li>
+    </div>
+  </nav>
+
+  <div class="container user-pannel">
+    <app-user-registration *ngIf='registerState' (login)='registerState = false'></app-user-registration>
+    <app-user-login *ngIf='!registerState' (registration)='registerState = true'></app-user-login>
+  </div>
+
+  <div class="container mt-3 challenges-pannel">
+    <router-outlet></router-outlet>
+  </div>
+</div>

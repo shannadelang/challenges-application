@@ -1,0 +1,77 @@
+<div *ngIf="loggedIn" class="list row">
+    <div class="col-md-7">
+      <div>
+        <div style="display:flex">
+          <img width="20%" src="assets/{{heroImg}}">
+          <div><h2>{{ hero }}</h2><h4>My score: {{score}}</h4></div>
+        </div>
+        <p *ngIf="hero !== 'Eco-warrior'">You need {{ 15 - score }} points more to become an Eco-warrior!</p>
+      </div>
+        <pagination-controls 
+          previousLabel="Prev"
+          nextLabel="Next"
+          responsive="true"
+          (pageChange)="handlePageChange($event)"></pagination-controls>
+        <ul class="list-group">
+          <h5>History of challenges</h5>
+          <div
+            class="list-group-item"
+            *ngFor="let challenge of challenges | paginate: {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: count
+              }; 
+              let i = index"
+            [class.active]="i == currentIndex"
+            style="margin-top: 0.5em;"
+            (click)="setSelectedChallenge(challenge, i)"
+            [style.color] ="getCategoryByName(challenge.category).color"
+            [style.background-color] ="'#f7f7f7'"
+          >
+          <div class="list-icon"><i style="font-size:2.5em;" [className]="getCategoryByName(challenge.category).icon"></i></div>
+            <div class="list-text">
+              <p class="challenge-title"> {{ challenge.title }}</p>
+              <p class="challenge-subtitle">Level: {{challenge.level}}</p>
+            </div>
+            </div>
+        </ul>
+    </div>
+
+    <div  class="col-md-5 fully-rounded" [class.shadow]="addState || currentChallenge">
+      <!--item details-->
+       <div *ngIf="currentChallenge;">
+            <div *ngIf="!stepActivated">
+              <button class="btn" (click)="currentChallenge=null"><i class="fas fa-long-arrow-alt-left" style="font-size: x-large;"></i></button>
+                <h5>{{ currentChallenge.title }}</h5>
+                <div>
+                   <label><strong>Category:</strong></label>
+                   {{ currentChallenge.category }}
+                </div>
+                <div>
+                  {{ currentChallenge.description }}
+                </div>
+                <div>
+                  <label><strong>Author:</strong></label>
+                  {{ currentChallenge.author }}
+                </div>  
+                <!--button *ngIf="loggedIn" class="btn btn-success" (click)="activateChallenge(); stepActivated = true;">
+                    Take this step!
+                </button-->
+            </div>
+            <div *ngIf="stepActivated">
+              <h4>{{ currentChallenge.title }}</h4>
+              <div>
+                <label><strong>Category:</strong></label>
+                {{ currentChallenge.category }}
+              </div>
+              <h3>Step succesfully added!</h3>
+              <button class="btn btn-success" (click)="stepActivated = false;"> OK </button>
+            </div>
+            <div *ngIf="!currentChallenge">
+              <br />
+              <p>Click on a to read more.</p>
+            </div>
+          </div>
+    </div>
+</div>
+<div *ngIf="!loggedIn"><p>You are not logged-in. Please log in first, to see your current challenges!</p></div>

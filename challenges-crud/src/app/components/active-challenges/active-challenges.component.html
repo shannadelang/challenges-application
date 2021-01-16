@@ -1,0 +1,69 @@
+<div *ngIf="loggedIn" class="list row">
+    <!--challenge list-->
+    <div class="col-md-7">
+      <h5>My active challenges</h5>
+        <pagination-controls 
+          previousLabel="Prev"
+          nextLabel="Next"
+          responsive="true"
+          (pageChange)="handlePageChange($event)"></pagination-controls>
+        <!--list items-->
+        <ul class="list-group">
+          <div
+            class="list-group-item"
+            *ngFor="let challenge of challenges | paginate: {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: count
+              }; 
+              let i = index"
+            [class.active]="i == currentIndex"
+            (click)="setSelectedChallenge(challenge, i)"
+            [style.background-color] ="getCategoryByName(challenge.category).color"
+            style="margin-top: 0.5em;"
+          >
+            <div class="list-icon"><i style="font-size:2.5em;" [className]="getCategoryByName(challenge.category).icon"></i></div>
+            <div class="list-text">
+              <p class="challenge-title"> {{ challenge.title }}</p>
+              <p class="challenge-subtitle">Level: {{challenge.level}}</p>
+            </div>
+          </div>
+        </ul>
+      </div>
+
+      <!--item list-->
+      <div  class="col-md-5 fully-rounded" [class.shadow]="addState || currentChallenge">
+          <div *ngIf="currentChallenge;">
+            <button class="btn" (click)="currentChallenge=null"><i class="fas fa-long-arrow-alt-left" style="font-size: x-large;"></i></button>
+            <div *ngIf="stepCompleted">
+              <h5>{{ currentChallenge.title }}</h5>
+              <div>
+                <label><strong>Category:</strong></label>
+                {{ currentChallenge.category }}
+              </div>
+              <div>
+                {{ currentChallenge.description }}
+              </div>
+              <div>
+                <label><strong>Author:</strong></label>
+                {{ currentChallenge.author }}
+              </div>
+  
+              <button class="btn btn-outline-info-reverse" (click)="updateChallenge(true); stepCompleted = true;">
+                I completed this!
+              </button>
+              <button (click)="updateChallenge(false)" class="btn btn-outline-info">Deactivate</button>
+            </div>
+            <div *ngIf="!stepCompleted">
+              <h4>Congratulations! <br> You earned {{currentChallenge.level}} points!</h4>
+              <h5>{{ currentChallenge.title }}</h5>
+              <div>
+                <label><strong>Category:</strong></label>
+                {{ currentChallenge.category }}
+              </div>
+              <button class="btn btn-success" (click)="stepCompleted = false;"> OK </button>
+            </div>
+          </div>
+      </div>
+</div>
+<div *ngIf="!loggedIn"><p>You are not logged-in. Please log in first, to see your current challenges!</p></div>

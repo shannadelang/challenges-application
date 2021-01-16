@@ -1,0 +1,16 @@
+.list-icon{
+    width: 2.6em; 
+    height: 2.6em; 
+    display: inline-block;
+    background-size: 100% 100%;
+    margin-right: 0.8em;
+    vertical-align: middle;
+    opacity: 65%;
+}
+
+.list-text{
+    display: inline-block;
+    height: auto; 
+    width: 82.5%;
+    vertical-align: middle;
+}

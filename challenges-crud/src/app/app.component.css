@@ -1,0 +1,53 @@
+.navbar{
+    padding: 2%;
+}
+
+.navbar-brand{
+    font-size: x-large;
+    color: #556662;
+}
+
+.nav-link{
+    font-size: x-large;
+}
+
+.container{
+    position: absolute;
+    display: inline-block;
+   /* background: #ce8888; */
+}
+
+.user-pannel{
+    transform: translate(10%, 0%);
+    width: 16%;
+    height: auto;
+}
+
+.mt-3{
+    transform: translate(25%, 0%);
+    width: 73%;
+}
+
+.nav-link{
+    margin-left: 2em;
+}
+
+.navbar-nav a{
+    color: #556662;
+}
+.navbar-nav a:hover{
+    color: white;
+}
+
+.decor{
+    position: absolute;
+    border-radius: 0px 0px 30px 30px;
+    height: 15%;
+    width: 100%;
+    box-shadow: 0px 9px 5px lightgray;
+    background-color: #7AA896;
+}
+
+.challenges-pannel{
+    padding-top: 0.5%;
+}

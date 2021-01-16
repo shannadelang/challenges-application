@@ -1,0 +1,112 @@
+<div class="list row">
+    <div class="col-md-10">
+
+      <div class="input-group mb-3">
+        <h2>Take a step towards a green lifestyle</h2>
+        <input
+         type="text"
+         class="form-control search"
+         placeholder="Search by title"
+         [(ngModel)]="title"
+        />
+        <div style="float: right" class="input-group-append">
+          <button
+            class="btn"
+            type="button"
+            (click)="searchTitle()"
+          >
+          <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--challenge list-->
+    <div class="col-md-7">
+      <pagination-controls 
+        previousLabel="Prev"
+        nextLabel="Next"
+        responsive="true"
+        (pageChange)="handlePageChange($event)">
+      </pagination-controls>
+      <!--filters-->
+      <button class="btn btn-outline-info" 
+        *ngFor="let c of categories" (click)="searchCategory(c.name)" 
+        [style.backgroundColor]="c.color" ><i [className]="c.icon"></i></button>
+      <button class="btn btn-outline-info-reverse" (click)="retrieveChallenges()">All</button>
+      <button class="btn btn-outline-info"
+       *ngIf="loggedIn" (click)="searchAuthor()">My own</button>
+      <!--list items-->
+      <ul class="list-group">
+        <div
+          class="list-group-item"
+          *ngFor="let challenge of challenges | paginate: {
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: count
+            }; 
+            let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setSelectedChallenge(challenge, i)"
+          [style.background-color] ="getCategoryByName(challenge.category).color"
+          style="margin-top: 0.5em;"
+        >
+        <div class="list-icon"><i style="font-size:2.5em;" [className]="getCategoryByName(challenge.category).icon"></i></div>
+          <div class="list-text">
+            <p class="challenge-title"> {{ challenge.title }}</p>
+            <p class="challenge-subtitle">Level: {{challenge.level}}</p>
+          </div>
+          </div>
+      </ul>
+      <button *ngIf="(!addState && !editState) && loggedIn" class="btn btn-outline-info-reverse" (click)="addState = true" ><i class="fas fa-plus-circle"></i> Create my own challenge</button>
+    </div>
+
+    <!--item details-->
+    <div  class="col-md-5 fully-rounded" [class.shadow]="addState || currentChallenge">
+      <div *ngIf="!addState">
+        <div *ngIf="currentChallenge">
+          <button class="btn" (click)="currentChallenge=null"><i class="fas fa-long-arrow-alt-left" style="font-size: x-large;"></i></button>
+          <div *ngIf="!stepActivated && !editState">
+            <h5>{{ currentChallenge.title }}</h5>
+            <div>
+              <label><strong>Category:</strong></label>
+              {{ currentChallenge.category }}
+            </div>
+            <div>
+              {{ currentChallenge.description }}
+            </div>
+            <div>
+              <label><strong>Author:</strong></label>
+              {{ currentChallenge.author }}
+            </div>
+
+            <button *ngIf="loggedIn" class="btn btn-outline-info" (click)="activateChallenge(); stepActivated = true;">
+              Take this step!
+            </button>
+            <button *ngIf="canEdit()" class="btn btn-info" (click)="editState = true">
+              Edit
+            </button>
+          </div>
+          <div *ngIf="stepActivated">
+            <h4>{{ currentChallenge.title }}</h4>
+            <div>
+              <label><strong>Category:</strong></label>
+              {{ currentChallenge.category }}
+            </div>
+            <h3>Step succesfully added!</h3>
+            <button class="btn btn-success" (click)="stepActivated = false"> OK </button>
+          </div>
+        </div>
+        </div>
+      <div *ngIf="addState">
+        <button class="btn btn-outline-info"
+            (click)="addState = false" >Cancel and go back</button>
+        <app-add-challenge></app-add-challenge>
+      </div>
+      <div *ngIf="editState"> <!--FIXME Edit form blijft staan na edit. Waarom is dit niet bij add-challenge? -->
+        <button class="btn btn-outline-info"
+            (click)="editState = false" >Cancel and go back</button>
+        <app-challenge-edit [currentChallenge]="currentChallenge"></app-challenge-edit>
+      </div>
+    </div>
+</div>

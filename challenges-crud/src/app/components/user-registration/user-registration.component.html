@@ -1,0 +1,57 @@
+<div class="content">
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+          <h4>Register as a user</h4>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            required
+            [(ngModel)]="user.username"
+            name="username"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            required
+            [(ngModel)]="user.password"
+            name="password"
+          />
+        </div>
+        <div class="form-group">
+          <label for="firstname">First name</label>
+          <input
+            class="form-control"
+            id="firstname"
+            required
+            [(ngModel)]="user.firstname"
+            name="firstname"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last name</label>
+          <input
+            class="form-control"
+            id="lastname"
+            required
+            [(ngModel)]="user.lastname"
+            name="lastname"
+          />
+        </div>
+  
+        <button (click)="saveUser()" class="btn btn-success">Submit</button>
+      </div>
+      <p><br> I am already a user, <button class="link-button" (click)='toLogin()'>sign in</button></p>
+  
+      <div *ngIf="submitted">
+        <h4>You registered successfully!</h4>
+        <button class="btn btn-success" (click)="newUser()">Ok</button>
+      </div>
+    </div>
+  </div>

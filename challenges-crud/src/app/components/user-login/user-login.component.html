@@ -1,0 +1,34 @@
+<div class="content" *ngIf="!loggedIn" >
+<div class="submit-form">
+    <h4>Login</h4>
+    <p style="color: red" *ngIf="message">{{message}}</p>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input
+            type="text"
+            class="form-control"
+            id="username"
+            required
+            [(ngModel)]="user.username"
+            name="username"
+        />
+    </div>
+    <div class="form-group">
+        <label for="password">password</label>
+        <input
+            type="password"
+            class="form-control"
+            id="password"
+            required
+            [(ngModel)]="user.password"
+            name="password"
+        />
+    </div>
+    <button (click)="logIn()" class="btn btn-success">Log me in</button>
+    <p><br> I am not a user yet, <button class="link-button" (click)='toRegistering()'> register </button></p>
+</div>
+</div>
+<div class="content" *ngIf="loggedIn">
+    <p>Logged in as {{user.username}}</p> 
+    <button (click)="removeStoredUser()" class="link-button">Sign out</button>
+</div>
